@@ -1,0 +1,17 @@
+name: Enforce PR targets main branch
+
+on:
+  pull_request:
+    branches-ignore:
+      - main
+
+jobs:
+  check-target-branch:
+    runs-on: ubuntu-latest
+    permissions: {}
+    steps:
+      - name: Fail if PR does not target main
+        run: |
+          echo "PRs must target the 'main' branch."
+          echo "This PR targets '${{ github.base_ref }}' instead of 'main'."
+          exit 1
